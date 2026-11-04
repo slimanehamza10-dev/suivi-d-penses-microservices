@@ -8,10 +8,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class DepenseService {
 
+    private final CategorieClient categorieClient;
     private final List<Depense> depenses = new ArrayList<>();
     private long prochainId = 1;
 
-    public synchronized Depense creer(CreationDepenseRequest request) {
+    public DepenseService(CategorieClient categorieClient) {
+        this.categorieClient = categorieClient;
+    }
+
+    public Depense creer(CreationDepenseRequest request) {
+        categorieClient.verifierExistence(request.categorieId());
+        return enregistrer(request);
+    }
+
+    private synchronized Depense enregistrer(
+            CreationDepenseRequest request) {
+
         Depense depense = new Depense(
                 prochainId++,
                 request.montant(),

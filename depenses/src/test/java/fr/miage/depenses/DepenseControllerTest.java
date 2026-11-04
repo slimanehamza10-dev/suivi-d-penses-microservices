@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @WebMvcTest(DepenseController.class)
 @Import(DepenseService.class)
@@ -21,6 +22,9 @@ class DepenseControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @MockitoBean
+private CategorieClient categorieClient;
 
     @Test
     void listeVideAuDemarrage() throws Exception {
