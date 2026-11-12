@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: depenses
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: depenses
+  template:
+    metadata:
+      labels:
+        app: depenses
+    spec:
+      containers:
+        - name: depenses
+          image: slisli10/depenses:0.1
+          ports:
+            - containerPort: 8081
