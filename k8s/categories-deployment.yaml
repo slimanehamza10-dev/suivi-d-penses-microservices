@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: categories
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: categories
+  template:
+    metadata:
+      labels:
+        app: categories
+    spec:
+      containers:
+      - name: categories
+        image: melissa849/categories:1.0
+        ports:
+        - containerPort: 8080
